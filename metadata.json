@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix The Melting Point",
+  "description": "An interactive climate memorial kiosk on the Nepal August 2026 flood, featuring real-time 3D WebGL Himalayan terrain visualization, particle simulations, and multi-act climate data exploration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

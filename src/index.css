@@ -1,0 +1,235 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ice-0: #0a1418;
+    --ice-1: #0f2028;
+    --ice-2: #1a3540;
+    --ice-glow: #7ec8e3;
+    --ice-bright: #b8e6f2;
+    --warn-1: #d97742;
+    --warn-2: #f4a261;
+    --warn-hot: #e63946;
+    --text: #eaf2f5;
+    --text-dim: #8fa3ab;
+    --text-faint: #4d6169;
+    --bg: #05090b;
+
+    --font-display: 'Instrument Serif', 'Times New Roman', serif;
+    --font-body: 'Space Grotesk', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-weight: 300;
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+    overscroll-behavior: none;
+    touch-action: none;
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Screen-space vignette + film grain overlays */
+.stage-vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    rgba(5, 9, 11, 0.3) 82%,
+    rgba(5, 9, 11, 0.75) 100%
+  );
+}
+
+.stage-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.9'/></svg>");
+}
+
+@keyframes rippleOut {
+  0% {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+  }
+  100% {
+    width: 240px;
+    height: 240px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* ==========================================================================
+   Visually Stunning Glacial Ice Melting System
+   Preserves razor-sharp Instrument Serif typography while simulating realistic
+   physical ice thaw: liquid caustics, physical water drips, and cold mist.
+   ========================================================================== */
+
+@keyframes iceThawCycle {
+  0%, 100% {
+    opacity: 0.96;
+    filter: drop-shadow(0 0 16px rgba(126, 200, 227, 0.45));
+    transform: translateY(0);
+  }
+  25% {
+    /* Pristine, frozen crystal ice state: 100% sharp & readable */
+    opacity: 1;
+    filter: drop-shadow(0 0 28px rgba(126, 200, 227, 0.75));
+    transform: translateY(0);
+  }
+  50% {
+    /* Surface melt layer forming: luminous water caustics glow */
+    opacity: 0.98;
+    filter: drop-shadow(0 2px 32px rgba(184, 230, 242, 0.85));
+    transform: translateY(0.5px);
+  }
+  75% {
+    /* Soft liquid refraction */
+    opacity: 0.92;
+    filter: drop-shadow(0 4px 26px rgba(126, 200, 227, 0.6));
+    transform: translateY(1px);
+  }
+}
+
+.animate-iceThawCycle {
+  animation: iceThawCycle 7s ease-in-out infinite;
+  will-change: opacity, transform, filter;
+}
+
+/* Liquid water reflection wave shimmering across letter surfaces */
+@keyframes causticSheen {
+  0%, 25% {
+    background-position: -220% 0;
+    opacity: 0;
+  }
+  38%, 68% {
+    background-position: 220% 0;
+    opacity: 0.85;
+  }
+  85%, 100% {
+    background-position: 220% 0;
+    opacity: 0;
+  }
+}
+
+.animate-causticSheen {
+  animation: causticSheen 8.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Cold glacial ambient glow pulse */
+@keyframes iceGlowPulse {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.98);
+  }
+  40%, 65% {
+    opacity: 0.55;
+    transform: scale(1.02);
+  }
+}
+
+.animate-iceGlowPulse {
+  animation: iceGlowPulse 5s ease-in-out infinite;
+}
+
+/* Sub-zero cold condensation haze drifting at the foot of the ice */
+@keyframes glacierMist {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scaleX(0.92) translateY(0);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scaleX(1.1) translateY(-2px);
+  }
+}
+
+.animate-glacierMist {
+  animation: glacierMist 6s ease-in-out infinite;
+}
+
+/* Natural gravity droplet formation, surface-tension tear, and acceleration */
+@keyframes waterDrip {
+  0%, 15% {
+    /* Microscopic condensation bead */
+    transform: translate(-50%, 0) scale(0.15);
+    opacity: 0;
+  }
+  28% {
+    /* Swelling water bead at letter tip */
+    transform: translate(-50%, 1px) scale(0.9);
+    opacity: 0.95;
+  }
+  42% {
+    /* Stretched teardrop hanging on surface tension */
+    transform: translate(-50%, 4px) scale(1, 1.4);
+    opacity: 1;
+  }
+  46% {
+    /* Surface tension breaks! Accelerating downward */
+    transform: translate(-50%, 14px) scale(0.85, 1.8);
+    opacity: 0.95;
+  }
+  72% {
+    /* Falling rapidly */
+    transform: translate(-50%, 55px) scale(0.7, 2.2);
+    opacity: 0.65;
+  }
+  88%, 100% {
+    /* Disperses into the cold valley air */
+    transform: translate(-50%, 85px) scale(1.4, 0.4);
+    opacity: 0;
+  }
+}
+
+.animate-waterDrip {
+  animation-name: waterDrip;
+  animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
